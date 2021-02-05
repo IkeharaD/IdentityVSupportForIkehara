@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <title>第五人格スポーン位置確認</title>
+        <script>
+            let list,stagelist,imagelist;
+            class MapInformation{
+                constructor(name,spawnLength){
+                    this.name=name;
+                    this.map=[];
+                    this.image=document.createElement("div");
+                    this.child=document.createElement("h2");
+                    this.child.textContent=name;
+                    let image=this.image;
+                    this.child.onclick=function(){
+                        stagelist.style.display="none";
+                        document.body.appendChild(image);
+                    }
+                    stagelist.appendChild(this.child);
+                    for(let i=1;i<=spawnLength;i++){
+                        this.map[i]=document.createElement("img");
+                        let map=this.map[i];
+                        map.src=name+i+".png";
+                        map.style.width=window.innerWidth+"px";
+                        map.style.height=window.innerWidth/4*3+"px";
+                        map.style.position="fixed";
+                        map.style.left="0px";
+                        map.style.top="0px";
+                        let image=document.createElement("img");
+                        image.src=name+i+"im.png";
+                        image.style.width=window.innerWidth+"px";
+                        image.style.height=window.innerWidth/4*3+"px";
+                        image.onclick=function(){
+                            document.body.appendChild(map);
+                        }
+                        this.image.appendChild(image);
+                    }
+                }
+            }
+            onload=function(){
+                stagelist=document.getElementById("list");
+                list=[new MapInformation("工場",6),new MapInformation("教会",7)];
+            }
+        </script>
+    </head>
+    <body>
+        <div id="list"></div>
+    </body>
+</html>
